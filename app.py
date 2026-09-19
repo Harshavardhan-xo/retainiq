@@ -39,7 +39,7 @@ def generate():
     expansion=np.clip(.25+.006*adoption+.05*(plan=="Enterprise")-.03*tickets+rng.normal(0,.08,n),0,1)
     logit=-2.3-.045*adoption+.06*tickets+1.15*unresolved-.025*np.minimum(logins,40)+.45*(plan=="Starter")-.35*expansion+rng.normal(0,.38,n)
     churn= rng.random(n) < 1/(1+np.exp(-logit))
-    customers=pd.DataFrame({"customer_id":np.arange(1,n+1),"signup_date":signup.dt.date,"region":region,"plan_tier":plan,
+    customers=pd.DataFrame({"customer_id":np.arange(1,n+1),"signup_date":signup.date,"region":region,"plan_tier":plan,
                             "industry":industry,"segment":segment,"seats":seats,"mrr":mrr.round(2),"adoption_score":adoption.round(1),
                             "logins_30d":logins.round(1),"tickets_30d":tickets,"unresolved_pct":unresolved.round(3),
                             "nps":nps.round(0),"expansion_propensity":expansion.round(3),"churned":churn})
